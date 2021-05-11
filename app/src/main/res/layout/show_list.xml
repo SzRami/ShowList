@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AAF5F4">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/show_list"
+        android:background="@color/light_blue"
+        android:name="hu.bme.aut.android.showlist.ShowListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ShowListActivity"
+        tools:listitem="@layout/show_list_content" />
+</FrameLayout>
