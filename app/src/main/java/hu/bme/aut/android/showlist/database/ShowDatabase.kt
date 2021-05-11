@@ -12,7 +12,5 @@ import hu.bme.aut.android.showlist.ShowDao
 
 abstract class ShowDatabase : RoomDatabase()
 {
-
     abstract fun showDao(): ShowDao
-
 }
