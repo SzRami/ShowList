@@ -19,6 +19,11 @@ class ShowRepository (private val showDao: ShowDao)
             }
     }
 
+    suspend fun delete(show : Show) = withContext(Dispatchers.IO) {
+        val roomShow = showDao.getShowById(show.id) ?: return@withContext
+        showDao.deleteShow(roomShow)
+    }
+
     suspend fun insert(show: Show) = withContext(Dispatchers.IO) {
         showDao.insertShow(show.toRoomModel())
     }

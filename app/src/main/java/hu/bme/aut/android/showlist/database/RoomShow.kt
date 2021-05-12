@@ -3,7 +3,7 @@ package hu.bme.aut.android.showlist.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "show")
+@Entity(tableName = "show_table")
 data class RoomShow(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

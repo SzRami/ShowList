@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Show list</string>
     <string name="watched">Watched</string>
+    <string name="title">Title:</string>
+    <string name="type">Type:</string>
+    <string name="description">Description:</string>
+    <string name="due_date">Due date:</string>
+    <string name="episode">Episode:</string>
+    <string name="wrongDate">Wrong date!</string>
 </resources>

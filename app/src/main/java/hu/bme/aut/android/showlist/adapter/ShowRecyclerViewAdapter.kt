@@ -1,5 +1,6 @@
 package hu.bme.aut.android.showlist.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class ShowRecyclerViewAdapter(
     interface ShowClickListener {
         fun onClick(show: Show)
 
-        fun onLongClick(show: Show)
+        fun onLongClick(show: Show, view: View): Boolean
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,14 +36,19 @@ class ShowRecyclerViewAdapter(
             showClickListener.onClick(show)
         }
 
-        holder.itemView.setOnLongClickListener{
-            showClickListener.onLongClick(show)
-            false
+        holder.itemView.setOnLongClickListener{ view ->
+            showClickListener.onLongClick(show,view)
+            true
         }
         holder.title.text = show.title
         holder.watched.isChecked = show.isWatched
     }
 
     override fun getItemCount() = shows.size
+
+    fun setShows(shows: List<Show>) {
+        this.shows = shows.toList()
+        notifyDataSetChanged()
+    }
 
 }

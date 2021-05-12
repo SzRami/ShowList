@@ -10,7 +10,7 @@ interface ShowDao
     @Insert
     fun insertShow(show: RoomShow)
 
-    @Query("SELECT * FROM show")
+    @Query("SELECT * FROM show_table")
     fun getAllShows(): LiveData<List<RoomShow>>
 
     @Update
@@ -18,4 +18,7 @@ interface ShowDao
 
     @Delete
     fun deleteShow(show: RoomShow)
+
+    @Query("SELECT * FROM show_table WHERE id == :id")
+    fun getShowById(id: Int?): RoomShow?
 }

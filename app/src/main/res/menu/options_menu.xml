@@ -3,6 +3,4 @@
 
     <item android:id="@+id/create_show"
         android:title="NEW"/>
-    <item android:id="@+id/delete_all"
-        android:title="DELETE ALL"/>
 </menu>
