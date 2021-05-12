@@ -6,7 +6,6 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/title_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
@@ -15,38 +14,38 @@
             <EditText
                 android:id="@+id/edit_text_title"
                 android:layout_width="267dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="50dp" />
         </TableRow>
 
         <TableRow>
             <TextView
-                android:id="@+id/type_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/type"
                 android:gravity="center"/>
-            <EditText
-                android:id="@+id/edit_text_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/dropdown_show_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/show_type" />
         </TableRow>
 
         <TableRow>
             <TextView
-                android:id="@+id/episode_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/episode"
                 android:gravity="center"/>
+
             <EditText
                 android:id="@+id/edit_text_episode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="50dp" />
         </TableRow>
 
         <TableRow>
             <TextView
-                android:id="@+id/description_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
@@ -59,16 +58,17 @@
         </TableRow>
 
         <TableRow>
+
             <TextView
-                android:id="@+id/due_date_create"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/due_date"
-                android:gravity="center"/>
+                android:layout_height="50dp"
+                android:gravity="center|center_vertical"
+                android:text="@string/due_date" />
+
             <TextView
                 android:id="@+id/edit_text_due_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="50dp" />
         </TableRow>
 
         <TableRow>

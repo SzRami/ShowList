@@ -7,19 +7,21 @@ import hu.bme.aut.android.showlist.database.RoomShow
 import hu.bme.aut.android.showlist.model.Show
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 
-class ShowRepository (private val showDao: ShowDao)
+class ShowRepository(private val showDao: ShowDao)
 {
     fun getAllShows(): LiveData<List<Show>>
     {
         return showDao.getAllShows()
-            .map {roomShows ->
-                roomShows.map {roomShow ->
-                    roomShow.toDomainModel() }
+            .map { roomShows ->
+                roomShows.map { roomShow ->
+                    roomShow.toDomainModel()
+                }
             }
     }
 
-    suspend fun delete(show : Show) = withContext(Dispatchers.IO) {
+    suspend fun delete(show: Show) = withContext(Dispatchers.IO) {
         val roomShow = showDao.getShowById(show.id) ?: return@withContext
         showDao.deleteShow(roomShow)
     }
@@ -36,7 +38,7 @@ class ShowRepository (private val showDao: ShowDao)
             type = type,
             isWatched = isWatched,
             description = description,
-            dueDate = dueDate,
+            dueDate = SimpleDateFormat.getDateInstance().parse(dueDate)!!,
             episode = episode
         )
     }
@@ -49,8 +51,14 @@ class ShowRepository (private val showDao: ShowDao)
             type = type,
             isWatched = isWatched,
             description = description,
-            dueDate = dueDate,
+            dueDate = SimpleDateFormat.getDateInstance().format(dueDate),
             episode = episode
         )
     }
+
+    fun getShowById(id: Int): LiveData<Show?>
+    {
+        return showDao.getLiveShowById(id).map { roomShow -> roomShow?.toDomainModel() }
+    }
+
 }

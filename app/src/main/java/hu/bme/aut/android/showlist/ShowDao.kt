@@ -21,4 +21,7 @@ interface ShowDao
 
     @Query("SELECT * FROM show_table WHERE id == :id")
     fun getShowById(id: Int?): RoomShow?
+
+    @Query("SELECT * FROM show_table WHERE id == :id")
+    fun getLiveShowById(id: Int?): LiveData<RoomShow?>
 }

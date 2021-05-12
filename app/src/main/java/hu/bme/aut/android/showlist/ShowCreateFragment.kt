@@ -2,22 +2,22 @@ package hu.bme.aut.android.showlist
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.showlist.databinding.FragmentShowCreateBinding
 import hu.bme.aut.android.showlist.model.Show
-import kotlinx.coroutines.processNextEventInCurrentThread
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.random.Random
 
-class ShowCreateFragment : DialogFragment(), DateSelected
+class ShowCreateFragment : DialogFragment(), DateSelected, AdapterView.OnItemSelectedListener
 {
     private lateinit var binding: FragmentShowCreateBinding
     private lateinit var listener: ShowCreatedListener
@@ -35,6 +35,7 @@ class ShowCreateFragment : DialogFragment(), DateSelected
     ): View
     {
         binding = FragmentShowCreateBinding.inflate(inflater, container, false)
+        binding.dropdownShowType.onItemSelectedListener = this
         dialog?.setTitle("Create show")
         return binding.root
     }
@@ -44,20 +45,19 @@ class ShowCreateFragment : DialogFragment(), DateSelected
     {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editTextDueDate.text = "  -  "
-
         binding.okButtonCreate.setOnClickListener {
-            val format = SimpleDateFormat.getDateInstance()
-            val date = format.parse(binding.editTextDueDate.text.toString())
-            if (date != null)
+            val types = resources.getStringArray(R.array.show_type)
+            val format = SimpleDateFormat("yyyy-MM-dd")
+            if (binding.editTextDueDate.text.toString() != "")
             {
+                val date = format.parse(binding.editTextDueDate.text.toString())
                 listener.onShowCreated(
                     Show(
                         id = Random.nextInt(),
                         title = binding.editTextTitle.text.toString(),
-                        type = binding.editTextType.text.toString(),
+                        type = types[binding.dropdownShowType.selectedItemPosition],
                         isWatched = false,
-                        description = binding.editTextDescription.toString(),
+                        description = binding.editTextDescription.text.toString(),
                         dueDate = date,
                         episode = binding.editTextEpisode.text.toString()
                     )
@@ -66,7 +66,7 @@ class ShowCreateFragment : DialogFragment(), DateSelected
             }
             else
             {
-                Toast.makeText(view.context, R.string.wrongDate, Toast.LENGTH_LONG).show()
+                Toast.makeText(view.context, R.string.wrong_date, Toast.LENGTH_LONG).show()
             }
         }
         binding.cancelButtonCreate.setOnClickListener {
@@ -95,9 +95,20 @@ class ShowCreateFragment : DialogFragment(), DateSelected
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, day)
 
-        val viewFormater = SimpleDateFormat("YYYY-MM-dd")
-        var viewFormattedDate: String = viewFormater.format(calendar.getTime())
+        val viewFormater = SimpleDateFormat("yyyy-MM-dd")
+        val viewFormattedDate = viewFormater.format(calendar.getTime())
         binding.editTextDueDate.text = viewFormattedDate
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+    {
+        val types = resources.getStringArray(R.array.show_type)
+        binding.editTextEpisode.isEnabled = types[position] == "Series"
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?)
+    {
+
     }
 }
 

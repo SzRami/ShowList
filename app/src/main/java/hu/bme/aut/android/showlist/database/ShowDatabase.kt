@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import hu.bme.aut.android.showlist.ShowDao
 
 @Database(
-    version = 2,
+    version = 3,
     exportSchema = false,
     entities = [RoomShow::class]
 )

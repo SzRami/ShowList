@@ -8,10 +8,10 @@ import hu.bme.aut.android.showlist.model.Show
 import hu.bme.aut.android.showlist.repository.ShowRepository
 import kotlinx.coroutines.launch
 
-class ShowViewModel: ViewModel()
+class ShowViewModel : ViewModel()
 {
-    private val repository : ShowRepository
-    val allShows : LiveData<List<Show>>
+    private val repository: ShowRepository
+    val allShows: LiveData<List<Show>>
 
     init
     {
@@ -26,5 +26,10 @@ class ShowViewModel: ViewModel()
 
     fun delete(show: Show) = viewModelScope.launch {
         repository.delete(show)
+    }
+
+    fun getShowById(id: Int): LiveData<Show?>
+    {
+        return repository.getShowById(id)
     }
 }
