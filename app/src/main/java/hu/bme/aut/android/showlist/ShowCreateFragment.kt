@@ -104,12 +104,10 @@ class ShowCreateFragment : DialogFragment(), DateSelected, AdapterView.OnItemSel
     {
         val types = resources.getStringArray(R.array.show_type)
         binding.editTextEpisode.isEnabled = types[position] == "Series"
+        if(types[position] == "Movie") binding.editTextEpisode.text = null
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?)
-    {
-
-    }
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
 }
 
 interface DateSelected

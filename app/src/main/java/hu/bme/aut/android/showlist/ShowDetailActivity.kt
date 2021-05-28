@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import hu.bme.aut.android.showlist.databinding.ActivityShowDetailBinding
 import hu.bme.aut.android.showlist.model.Show
 import hu.bme.aut.android.showlist.viewmodel.ShowViewModel
+import java.text.SimpleDateFormat
 
 class ShowDetailActivity: AppCompatActivity()
 {
@@ -24,7 +25,7 @@ class ShowDetailActivity: AppCompatActivity()
             binding.typeDetail.text = show?.type
             binding.episodeDetail.text = show?.episode
             binding.descriptionDetail.text = show?.description
-            binding.dueDateDetail.text = show?.dueDate.toString()
+            binding.dueDateDetail.text = SimpleDateFormat("yyyy-MM-dd").format(show?.dueDate)
         })
 
         setContentView(binding.root)

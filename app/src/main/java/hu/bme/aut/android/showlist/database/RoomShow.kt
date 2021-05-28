@@ -2,7 +2,6 @@ package hu.bme.aut.android.showlist.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "show_table")
 data class RoomShow(

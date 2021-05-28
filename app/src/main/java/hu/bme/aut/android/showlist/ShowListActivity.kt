@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.showlist.adapter.ShowRecyclerViewAdapter
 import hu.bme.aut.android.showlist.databinding.ActivityShowListBinding
 import hu.bme.aut.android.showlist.model.Show
+import hu.bme.aut.android.showlist.notification.ShowNotificationHelper
 import hu.bme.aut.android.showlist.viewmodel.ShowViewModel
 
 class ShowListActivity : AppCompatActivity(), ShowRecyclerViewAdapter.ShowClickListener,
     ShowCreateFragment.ShowCreatedListener
 {
-
-    companion object {
+    companion object
+    {
         val SHOW_ID = "SHOW_ID"
     }
 
@@ -87,8 +88,22 @@ class ShowListActivity : AppCompatActivity(), ShowRecyclerViewAdapter.ShowClickL
         return false
     }
 
+    override fun watchedClick(show: Show)
+    {
+        showViewModel.update(Show(
+            show.id,
+            show.title,
+            show.type,
+            !show.isWatched,
+            show.description,
+            show.dueDate,
+            show.episode
+        ))
+    }
+
     override fun onShowCreated(show: Show)
     {
         showViewModel.insert(show)
+        ShowNotificationHelper.createToWatchNotification(this, show)
     }
 }

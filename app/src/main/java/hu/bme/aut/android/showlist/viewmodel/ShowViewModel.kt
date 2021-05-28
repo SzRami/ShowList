@@ -20,6 +20,10 @@ class ShowViewModel : ViewModel()
         allShows = repository.getAllShows()
     }
 
+    fun update(show: Show) = viewModelScope.launch {
+        repository.update(show)
+    }
+
     fun insert(show: Show) = viewModelScope.launch {
         repository.insert(show)
     }

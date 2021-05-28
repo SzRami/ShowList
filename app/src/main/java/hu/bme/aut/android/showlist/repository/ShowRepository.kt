@@ -61,4 +61,8 @@ class ShowRepository(private val showDao: ShowDao)
         return showDao.getLiveShowById(id).map { roomShow -> roomShow?.toDomainModel() }
     }
 
+    suspend fun update(show: Show) = withContext(Dispatchers.IO) {
+        showDao.updateShow(show.toRoomModel())
+    }
+
 }
